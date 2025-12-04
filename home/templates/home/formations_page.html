@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block title %}Femmes Solidaires - Nos formations{% endblock %}
+
+{% block content %}
+<style>
+    /* =======================
+       Styles page "Nos formations"
+       ======================= */
+
+    .formations-section {
+        padding: 3rem 0;
+    }
+
+    .formations-list-grid {
+        margin-top: 2rem;
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .formation-card-full {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid #e5e7eb;
+    }
+
+    .formation-card-full h2 {
+        font-size: 1.15rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .formation-card-full p {
+        font-size: 0.95rem;
+        color: #4b5563;
+        margin-bottom: 0.75rem;
+    }
+
+    .formation-features {
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-left: 1.1rem;
+    }
+
+    .formation-badge-full {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #2563eb;
+        margin-bottom: 0.35rem;
+    }
+
+    /* =======================
+       Version mobile
+       ======================= */
+
+    @media (max-width: 768px) {
+        .formations-section {
+            padding: 2.5rem 0;
+        }
+
+        .formations-list-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="formations-section">
+    <div class="container">
+        <!-- Titre et sous-titre venant du modèle -->
+        <h1 class="section-title">
+            {{ page.intro_title|default:"Nos Formations Accessibles" }}
+        </h1>
+        <p class="section-subtitle">
+            {{ page.intro_subtitle|default:"Des formations ouvertes à toutes, sans CV ni diplôme. L'entrée se fait par une discussion, un temps d'écoute pour comprendre vos motivations et vos besoins." }}
+        </p>
+
+        <div class="formations-list-grid">
+            {% if page.formations %}
+                {% for block in page.formations %}
+                    {% if block.block_type == "formation" %}
+                        {% with formation=block.value %}
+                            <article class="formation-card-full">
+                                {% if formation.image %}
+                                    <div style="border-radius:0.9rem; overflow:hidden; margin-bottom:0.75rem;">
+                                        {% image formation.image fill-600x350 %}
+                                    </div>
+                                {% endif %}
+
+                                {% if formation.badge %}
+                                    <div class="formation-badge-full">
+                                        {{ formation.badge }}
+                                    </div>
+                                {% endif %}
+
+                                <h2>
+                                    {{ formation.title }}
+                                </h2>
+
+                                {% if formation.description %}
+                                    <p>
+                                        {{ formation.description }}
+                                    </p>
+                                {% endif %}
+
+                                {% if formation.features %}
+                                    <ul class="formation-features">
+                                        {% for feature in formation.features %}
+                                            <li>{{ feature }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </article>
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p style="color:#6b7280; font-size:0.95rem; margin-top:1.5rem;">
+                    Aucun formation n’a encore été ajouté. Vous pouvez créer vos formations dans l’admin Wagtail pour les voir apparaître ici.
+                </p>
+            {% endif %}
+
+            <div style="display:inline-block; width:200px; padding:20px; text-align:center; background-color:#fff0f0; border-radius:12px; margin:10px;">
+    <h3>Comment ça marche ?</h3>
+    <p>1. Venez nous parler : Un échange simple et direct, sans formalité ni jugement.</p>
+
+    <div style="display:inline-block; width:170px; padding:20px; text-align:left; background-color:#fff0f0; border-radius:12px; margin:5px;">
+    <p>2. Choisissez votre voie : Ensemble, on identifie la formation qui vous correspond. </p>
+
+    <div style="display:inline-block; width:100px; padding:3px; text-align:left; background-color:#fff0f0; border-radius:12px; margin:1px;">
+    <p>3. Apprenez en pratiquant : Ateliers concrets, gestes transmis, entraide organisée.</p>
+
+    </div>
+</section>
+{% endblock %}

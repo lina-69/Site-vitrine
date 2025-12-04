@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  {% if page.temoignages_blocks %}
+    <div class="temoignages-blocs">
+      {% for block in page.temoignages_blocks %}
+        {% if block.block_type == 'temoignage' %}
+          <div class="temoignage-card">
+            <!-- contenu du bloc -->
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+{% endblock %}
