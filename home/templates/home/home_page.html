@@ -196,6 +196,38 @@
         font-size: 0.95rem;
     }
 
+
+     .formations-preview {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+}
+
+.formation-card {
+    background: #ffffff;
+    padding: 25px;
+    width: 260px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgb(255, 188, 117);
+    text-decoration: none;
+    color: #000000;
+    transition: 0.3s;
+}
+
+.formation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgb(212, 61, 61);
+}
+
+.formation-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+
+
     /* =======================
        Version mobile (téléphone)
        ======================= */
@@ -306,7 +338,7 @@
                                         {% endif %}
                                         <h3 class="formation-title">{{ formation.title }}</h3>
                                         <p class="formation-subtext">
-                                            Voir ce formation en détail →
+                                            Voir cette formation en détail →
                                         </p>
                                     </div>
                                 </div>
@@ -317,10 +349,9 @@
             </div>
         {% else %}
             <p style="margin-top:1.5rem; color:#6b7280; font-size:0.9rem;">
-                Aucun formation n’est encore configuré. Vous pouvez ajouter vos formations depuis l’admin Wagtail.
             </p>
         {% endif %}
-
+        
         <!-- Petit rappel vers la page contact -->
         <div class="home-contact-cta">
             <p>Vous avez une question à poser ?</p>
